@@ -80,4 +80,12 @@ Outfile.write("Greatest Increase in Profits: " + str(Date[Increase_Index]) + " (
 Outfile.write("Greatest Decrease in Profits: " +  str(Date[Decrease_Index]) + " ($" + str(Greatest_Decrease_In_Profits) + ")" + "\n")
 
 
-
+print(
+    "Financial Analysis" + "\n"
+    "----------------------------" + "\n"
+    "Total Months: " + str(Total_Months) + "\n"
+    "Total: $" + str(Total_Profits) + "\n"
+    "Average Change: $" + str(Average_Change) + "\n"
+    "Greatest Increase in Profits: " + str(Date[Increase_Index]) + " ($" + str(Greatest_Increase_In_Profits) + ")" + "\n"
+    "Greatest Decrease in Profits: " +  str(Date[Decrease_Index]) + " ($" + str(Greatest_Decrease_In_Profits) + ")" + "\n"
+    )
