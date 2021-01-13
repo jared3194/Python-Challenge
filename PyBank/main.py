@@ -1,34 +1,6 @@
-# In this challenge, you are tasked with creating a Python script for analyzing the financial records of your company. 
-# You will give a set of financial data called budget_data.csv. 
-# The dataset is composed of two columns: Date and Profit/Losses. 
-# (Thankfully, your company has rather lax standards for accounting so the records are simple.)
-
-# Your task is to create a Python script that analyzes the records to calculate each of the following:
-# The total number of months included in the dataset
-
-# The net total amount of "Profit/Losses" over the entire period
-
-# Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
-
-# The greatest increase in profits (date and amount) over the entire period
-
-# The greatest decrease in losses (date and amount) over the entire period
-
-# As an example, your analysis should look similar to the one below:
-
-# Financial Analysis
-# ----------------------------
-# Total Months: 86
-# Total: $38382578
-# Average  Change: $-2315.12
-# Greatest Increase in Profits: Feb-2012 ($1926159)
-# Greatest Decrease in Profits: Sep-2013 ($-2196167)
-# In addition, your final script should both print the analysis to the terminal and export a text file with the results.
-
 # Modules
 import os
 import csv
-from datetime import datetime
 from typing import Text
 
 # Store the filepath in a variable
@@ -39,12 +11,15 @@ reader = csv.reader(file)
 header = next(reader) # The first line is the header
 
 data = []
+Date = []
+
 for row in reader:
     # row = [Date, Profit/Losses]
-    date = datetime.strptime(row[0], '%b-%Y')
-    Profit_Losses = int( row[1])
+    date = str([0])
+    Profit_Losses = int(row[1])
 
     data.append([date, Profit_Losses])
+    Date.append(row[0])
 
 # Compute and store data
 # Determine the total number of months included in the dataset
@@ -80,19 +55,18 @@ Average_Change = round(Average(Change),2)
 # Calculate the greatest increase in profits
 
 Greatest_Increase_In_Profits = max(Change)
-print(Greatest_Increase_In_Profits)
+
+Increase_Index = Change.index(max(Change)) + 1
+
 
 # Calculate the greatest decrease in profits
 
 Greatest_Decrease_In_Profits = min(Change)
 
+Decrease_Index = Change.index(min(Change)) + 1
+
 # Determine what month produced the min/max profit changes
 
-
-# Greatest_Decrease_Month = Change.index((Greatest_Decrease_In_Profits) + 1)
-# print(Greatest_Decrease_Month)
-
-# print(Greatest_Decrease_Month)
 
 analyzed_path = "Analysis/Financial_Analysis.txt"
 Outfile = open(analyzed_path, 'w+')
@@ -102,8 +76,8 @@ Outfile.write("----------------------------" + "\n")
 Outfile.write("Total Months: " + str(Total_Months) + "\n")
 Outfile.write("Total: $" + str(Total_Profits) + "\n")
 Outfile.write("Average Change: $" + str(Average_Change) + "\n")
-Outfile.write("Greatest Increase in Profits: $" + str(Greatest_Increase_In_Profits) + "\n")
-Outfile.write("Greatest Decrease in Profits: $" + str(Greatest_Decrease_In_Profits) + "\n")
+Outfile.write("Greatest Increase in Profits: " + str(Date[Increase_Index]) + " ($" + str(Greatest_Increase_In_Profits) + ")" + "\n")
+Outfile.write("Greatest Decrease in Profits: " +  str(Date[Decrease_Index]) + " ($" + str(Greatest_Decrease_In_Profits) + ")" + "\n")
 
 
 
